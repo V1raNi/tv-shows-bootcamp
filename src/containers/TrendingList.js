@@ -12,7 +12,7 @@ class TrendingList extends Component {
 
   render() {
     const { shows } = this.props;
-    let showsTable = shows.map((show, i) => (
+    let showsList = shows.map((show, i) => (
       <ShowItem
         key={i}
         number={i + 1}
@@ -20,8 +20,10 @@ class TrendingList extends Component {
         title={show.show.title}
         watchers={show.watchers}
         year={show.show.year}
+        status={show.show.status}
+        rating={show.show.rating}
         poster='poster'
-        description='description'
+        description={show.show.overview}
       />
     ));
     return(
@@ -32,13 +34,15 @@ class TrendingList extends Component {
             <div className="divTableHead">ID</div>
             <div className="divTableHead">Title</div>
             <div className="divTableHead">Year</div>
+            <div className="divTableHead">Status</div>
             <div className="divTableHead">Poster</div>
+            <div className="divTableHead">Rating</div>
             <div className="divTableHead">Watchers</div>
             <div className="divTableHead">Description</div>
           </div>
         </div>
         <div className="divTableBody">
-          {showsTable}
+          {showsList}
         </div>
       </div>
     )
@@ -46,7 +50,6 @@ class TrendingList extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
   return {
     shows: state.shows.trendingShows
   }

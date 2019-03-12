@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ShowItem = ({number, ids, title, year, poster, description, watchers}) => (
+const ShowItem = ({number, ids, title, year, poster, description, watchers, status, rating}) => (
   <div className="divTableRow">
     <div id="number" className="divTableCell">
       {number}
@@ -13,6 +13,12 @@ const ShowItem = ({number, ids, title, year, poster, description, watchers}) => 
     </div>
     <div id="year" className="divTableCell">
       {year}
+    </div>
+    <div id="status" className="divTableCell">
+      {status}
+    </div>
+    <div id="rating" className="divTableCell">
+      {rating}
     </div>
     <div id="poster" className="divTableCell">
       {poster}
