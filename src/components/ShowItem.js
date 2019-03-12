@@ -1,26 +1,26 @@
 import React from 'react';
 
 const ShowItem = ({number, ids, title, year, poster, description, watchers}) => (
-  <div className="show-item-row">
-    <div id="number" className="cell">
+  <div className="divTableRow">
+    <div id="number" className="divTableCell">
       {number}
     </div>
-    <div id="show-id" className="cell">
+    <div id="show-id" className="divTableCell">
       {ids}
     </div>
-    <div id="title" className="cell">
+    <div id="title" className="divTableCell">
       {title}
     </div>
-    <div id="year" className="cell">
+    <div id="year" className="divTableCell">
       {year}
     </div>
-    <div id="poster" className="cell">
+    <div id="poster" className="divTableCell">
       {poster}
     </div>
-    <div id="watchers" className="cell">
+    {watchers ? <div id="watchers" className="divTableCell">
       {watchers}
-    </div>
-    <div id="description" className="cell">
+    </div> : null}
+    <div id="description" className="divTableCell">
       {description}
     </div>
   </div>

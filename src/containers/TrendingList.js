@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchTrendShows } from '../store/actions/trendingShows';
+import { fetchTrendShows } from '../store/actions/shows';
 import ShowItem from '../components/ShowItem';
 
 class TrendingList extends Component {
@@ -25,17 +25,19 @@ class TrendingList extends Component {
       />
     ));
     return(
-      <div>
-        <div className="header-row">
-          <div className="cell header-cell">Number</div>
-          <div className="cell header-cell">ID</div>
-          <div className="cell header-cell">Title</div>
-          <div className="cell header-cell">Year</div>
-          <div className="cell header-cell">Poster</div>
-          <div className="cell header-cell">Watchers</div>
-          <div className="cell header-cell">Description</div>
+      <div className="divTable">
+        <div className="divTableHeading">
+          <div className="divTableRow">
+            <div className="divTableHead">Number</div>
+            <div className="divTableHead">ID</div>
+            <div className="divTableHead">Title</div>
+            <div className="divTableHead">Year</div>
+            <div className="divTableHead">Poster</div>
+            <div className="divTableHead">Watchers</div>
+            <div className="divTableHead">Description</div>
+          </div>
         </div>
-        <div className="shows-list">
+        <div className="divTableBody">
           {showsTable}
         </div>
       </div>
@@ -44,8 +46,9 @@ class TrendingList extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state);
   return {
-    shows: state.trendingShows
+    shows: state.shows.trendingShows
   }
 }
 

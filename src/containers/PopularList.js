@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPopShows } from '../store/actions/popularShows';
+import { fetchPopShows } from '../store/actions/shows';
 import ShowItem from '../components/ShowItem';
 
 class PopularList extends Component {
@@ -24,16 +24,18 @@ class PopularList extends Component {
       />
     ));
     return(
-      <div>
-        <div className="header-row">
-          <div className="cell header-cell">Number</div>
-          <div className="cell header-cell">ID</div>
-          <div className="cell header-cell">Title</div>
-          <div className="cell header-cell">Year</div>
-          <div className="cell header-cell">Poster</div>
-          <div className="cell header-cell">Description</div>
+      <div className="divTable">
+        <div className="divTableHeading">
+          <div className="divTableRow">
+            <div className="divTableHead">Number</div>
+            <div className="divTableHead">ID</div>
+            <div className="divTableHead">Title</div>
+            <div className="divTableHead">Year</div>
+            <div className="divTableHead">Poster</div>
+            <div className="divTableHead">Description</div>
+          </div>
         </div>
-        <div className="shows-list">
+        <div className="divTableBody">
           {showsTable}
         </div>
       </div>
@@ -43,7 +45,7 @@ class PopularList extends Component {
 
 function mapStateToProps(state) {
   return {
-    shows: state.popularShows
+    shows: state.shows.popularShows
   }
 }
 
