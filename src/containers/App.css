@@ -64,7 +64,7 @@
   display: table-row;
 }
 .divTableRow:nth-child(even) {
-  background-color: #999999;
+  background-color: #d8d8d8;
 }
 .divTableHeading {
   background-color: #EEE;
@@ -87,4 +87,9 @@
 }
 .divTableBody {
   display: table-row-group;
+}
+
+img {
+  width: 100px;
+  height: 100px;
 }

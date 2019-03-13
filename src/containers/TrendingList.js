@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 
 import { fetchTrendShows } from '../store/actions/shows';
 import ShowItem from '../components/ShowItem';
+import Table from '../components/Table';
 
 class TrendingList extends Component {
   
   componentDidMount() {
     this.props.fetchTrendShows();
+    this.props.switchNavBar(true);
   }
 
   render() {
@@ -22,25 +24,13 @@ class TrendingList extends Component {
         year={show.show.year}
         status={show.show.status}
         rating={show.show.rating}
-        poster='poster'
+        poster={show.imageUrl}
         description={show.show.overview}
       />
     ));
     return(
       <div className="divTable">
-        <div className="divTableHeading">
-          <div className="divTableRow">
-            <div className="divTableHead">Number</div>
-            <div className="divTableHead">ID</div>
-            <div className="divTableHead">Title</div>
-            <div className="divTableHead">Year</div>
-            <div className="divTableHead">Status</div>
-            <div className="divTableHead">Poster</div>
-            <div className="divTableHead">Rating</div>
-            <div className="divTableHead">Watchers</div>
-            <div className="divTableHead">Description</div>
-          </div>
-        </div>
+        <Table page='trending' />
         <div className="divTableBody">
           {showsList}
         </div>

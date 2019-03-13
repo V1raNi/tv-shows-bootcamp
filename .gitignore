@@ -22,3 +22,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#backups and some info
+api info.txt
+some backup api shit.js
+apibackup.js
+Untitled-1.txt
+Untitled-2.txt
+popularShowsReducer.js
+popularShowsAction.js
+trendingShowsReducer.js
+trendingShowsAction.js

@@ -1,4 +1,4 @@
-import { traktApiCall } from '../../services/api';
+import { apiCall } from '../../services/api';
 import { LOAD_POP_SHOWS, LOAD_TREND_SHOWS } from '../actionTypes';
 
 export const loadPopShows = popularShows => ({
@@ -14,7 +14,7 @@ export const loadTrendShows = trendingShows => ({
 export const fetchPopShows = () => {
   return async dispatch => {
     try {
-      const shows = await traktApiCall('https://api.trakt.tv/shows/popular?extended=full');
+      const shows = await apiCall('https://api.trakt.tv/shows/popular?extended=full');
       return dispatch(loadPopShows(shows));
     }
     catch (err) {
@@ -26,7 +26,7 @@ export const fetchPopShows = () => {
 export const fetchTrendShows = () => {
   return async dispatch => {
     try {
-      const shows = await traktApiCall('https://api.trakt.tv/shows/trending?extended=full');
+      const shows = await apiCall('https://api.trakt.tv/shows/trending?extended=full');
       return dispatch(loadTrendShows(shows));
     }
     catch (err) {

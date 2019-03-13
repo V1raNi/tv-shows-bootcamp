@@ -1,54 +1,62 @@
-export function traktApiCall(url) {
+export function apiCall(url) {
+  return traktApiCall(url)
+    .then(data => {
+      return combineData(data);
+    });
+}
+
+function traktApiCall(url) {
   return fetch(url, {
     method: 'get',
     headers: new Headers({
       'Content-Type': 'application/json',
       'trakt-api-version': 2,
       'trakt-api-key': process.env.REACT_APP_TRAKT_API_KEY,
-      'Authorization': 'Bearer f04dd126ae120f7e9d6e5a64ff0564bb59d7aa67fb0c3499183e4e32133f3079',
+      'Authorization': `Bearer ${process.env.REACT_APP_TRAKT_AUTH_KEY}`,
     }),
-    // mode: 'no-cors'
   })
+  .then(res => {
+    errorHandling(res);
+    return res.json();
+  });
+}
+
+function fanartApiCall(url) {
+  return fetch(url)
     .then(res => {
-      if (!res.ok) {
-        if (res.status >= 400 && res.status < 500) {
-          return res.json()
-            .then(data => {
-              let err = {errorMessage: data.message};
-              throw err;
-          });
-        } else {
-          let err = {errorMessage: 'Try again later, server is not responding'};
-          throw err;
-        }
-      }
+      errorHandling(res);
       return res.json();
     });
 }
 
-export function fanartApiCall(url) {
-  return fetch(url, {
-    method: 'get',
-    headers: new Headers({
-      // 'Content-Type': 'application/json',
-      // 'api_key': process.env.REACT_APP_FANART_API_KEY,
-      // 'client-key': process.env.REACT_APP_FANART_CLIENT_KEY
-    }),
-  })
-  .then(res => {
-    if (!res.ok) {
-      if (res.status >= 400 && res.status < 500) {
-        return res.json()
-          .then(data => {
-            let err = {errorMessage: data.message};
+function combineData(data) {
+  let showsPromises = data.map(show => {
+    let showId = show.show ? show.show.ids.tvdb : show.ids.tvdb;
+    let url = `http://webservice.fanart.tv/v3/tv/${showId}?api_key=${process.env.REACT_APP_FANART_API_KEY}`;
+    return fanartApiCall(url)
+    .then(fanartShows => {
+      // sometimes there is to tvposter, we use tvthumb instead
+      let image = fanartShows.tvposter ? fanartShows.tvposter[0].url : fanartShows.tvthumb[0].url;
+      show.imageUrl = image;
+      return show;
+    });
+  });
+  
+  const finalData = Promise.all(showsPromises);
+  return finalData;
+}
+
+function errorHandling (response) {
+  if (!response.ok) {
+    if (response.status >= 400 && response.status < 500) {
+      return response.json()
+        .then(data => {
+          let err = {errorMessage: data.message};
             throw err;
         });
       } else {
         let err = {errorMessage: 'Try again later, server is not responding'};
         throw err;
       }
-    }
-    return res.json();
-  });
+  }
 }
-

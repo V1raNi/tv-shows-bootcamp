@@ -21,7 +21,7 @@ const ShowItem = ({number, ids, title, year, poster, description, watchers, stat
       {rating}
     </div>
     <div id="poster" className="divTableCell">
-      {poster}
+      <img src={poster} alt="Show Poster" />
     </div>
     {watchers ? <div id="watchers" className="divTableCell">
       {watchers}
