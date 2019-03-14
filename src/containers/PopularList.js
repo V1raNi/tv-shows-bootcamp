@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchPopShows } from '../store/actions/shows';
-import queryHandler from '../helpers/queryHandler';
 import ShowItem from '../components/ShowItem';
 
 class PopularList extends Component {
   
   componentDidMount() {
     this.props.fetchPopShows();
-    // this.props.switchVisibility(true);
   }
 
   render() {
@@ -31,7 +29,7 @@ class PopularList extends Component {
     });
 
     return(
-      <div>
+      <div className="divTableBody">
         {showsList}
       </div>
     )

@@ -1,7 +1,15 @@
 export function apiCall(url) {
   return traktApiCall(url)
-    .then(data => {
-      return combineData(data);
+    .then(async (data, headers) => {
+      console.log(headers);
+      console.log(data);
+      // let shows = combineData(data[0]).then(result => shows = result);
+      // need to figure out if there is a way to do that without Promise.all
+      // const finalData = Promise.all([shows, items]);
+      const shows = await combineData(data[0]);
+      const items = data[1];
+      const finalData = [shows, items];
+      return finalData;
     });
 }
 
@@ -15,9 +23,13 @@ function traktApiCall(url) {
       'Authorization': `Bearer ${process.env.REACT_APP_TRAKT_AUTH_KEY}`,
     }),
   })
-  .then(res => {
+  .then(async res => {
     errorHandling(res);
-    return res.json();
+    const body = await res.json();
+    // const body = res.json();
+    const headers = res.headers.get('x-pagination-item-count');
+    // return Promise.all([body, headers]);
+    return (body, headers)
   });
 }
 

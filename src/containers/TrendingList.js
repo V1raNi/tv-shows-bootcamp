@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { fetchTrendShows } from '../store/actions/shows';
-import queryHandler from '../helpers/queryHandler';
 import ShowItem from '../components/ShowItem';
-import TableHeader from '../components/TableHeader';
-import SearchArea from './SearchArea';
 class TrendingList extends Component {
   
   componentDidMount() {
     this.props.fetchTrendShows();
-    // this.props.switchVisibility(true);
   }
 
   render() {
@@ -32,7 +28,7 @@ class TrendingList extends Component {
       />
     });
     return(
-      <div>
+      <div className="divTableBody">
         {showsList}
       </div>
     )
