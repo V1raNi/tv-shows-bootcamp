@@ -4,19 +4,12 @@ import { connect } from 'react-redux';
 import { fetchPopShows } from '../store/actions/shows';
 import queryHandler from '../helpers/queryHandler';
 import ShowItem from '../components/ShowItem';
-import Table from '../components/Table';
-import SearchArea from './SearchArea';
 
 class PopularList extends Component {
   
   componentDidMount() {
     this.props.fetchPopShows();
-    this.props.switchVisibility(true);
-  }
-
-  getShows = query => {
-    const queryText = queryHandler(query);
-    this.props.fetchPopShows(queryText);
+    // this.props.switchVisibility(true);
   }
 
   render() {
@@ -39,21 +32,7 @@ class PopularList extends Component {
 
     return(
       <div>
-        <SearchArea sendRequestQuery={this.getShows}/>
-        <div className="divTable">
-          <Table page='popular' />
-          <div className="divTableBody">
-          {showsList}
-          </div>
-          <div class="links">
-            <a href="#">&laquo;</a>
-            <a class="active" href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">&raquo;</a>
-          </div>
-        </div>
+        {showsList}
       </div>
     )
   }
