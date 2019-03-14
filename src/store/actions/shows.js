@@ -11,10 +11,13 @@ export const loadTrendShows = trendingShows => ({
   trendingShows
 });
 
-export const fetchPopShows = () => {
+export const fetchPopShows = (query = 'page=1&limit=10') => {
   return async dispatch => {
     try {
-      const shows = await apiCall('https://api.trakt.tv/shows/popular?extended=full');
+      console.log(query);
+      let url = `https://api.trakt.tv/shows/popular?extended=full&${query}`;
+      console.log(url);
+      const shows = await apiCall(url);
       return dispatch(loadPopShows(shows));
     }
     catch (err) {
@@ -23,10 +26,11 @@ export const fetchPopShows = () => {
   }
 }
 
-export const fetchTrendShows = () => {
+export const fetchTrendShows = (query = 'page=1&limit=10') => {
   return async dispatch => {
     try {
-      const shows = await apiCall('https://api.trakt.tv/shows/trending?extended=full');
+      let url = `https://api.trakt.tv/shows/trending?extended=full&${query}`;
+      const shows = await apiCall(url);
       return dispatch(loadTrendShows(shows));
     }
     catch (err) {

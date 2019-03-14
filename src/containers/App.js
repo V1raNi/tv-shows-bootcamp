@@ -10,30 +10,29 @@ import Navbar from './Navbar';
 const store = configureStore();
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      navBarVisible: false
+      elementVisible: false
     }
-    this.changeNavbarVisibility = this.changeNavbarVisibility.bind(this);
   }
 
-  changeNavbarVisibility(value) {
+  changeVisibility = value => {
     this.setState({
-      navBarVisible: value
+      elementVisible: value
     });
   }
 
   render() {
     return (
-    <Provider store={store}>
-    <Router>
-      <div>
-        <Navbar navBarVisible={this.state.navBarVisible} />
-        <Main updateNavBarVisibility={this.changeNavbarVisibility} />
-      </div>
-    </Router>
-  </Provider>
+      <Provider store={store}>
+        <Router>
+          <div>
+            <Navbar navBarVisible={this.state.elementVisible} />
+            <Main updateVisibility={this.changeVisibility} />
+          </div>
+        </Router>
+      </Provider>
     )
   }
 };

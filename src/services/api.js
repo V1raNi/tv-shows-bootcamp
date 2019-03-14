@@ -24,7 +24,13 @@ function traktApiCall(url) {
 function fanartApiCall(url) {
   return fetch(url)
     .then(res => {
-      errorHandling(res);
+      // errorHandling(res);
+      if (res.status === 404) {
+        return res.json()
+        .then(data => {
+          console.log(data);
+        });
+      }
       return res.json();
     });
 }
@@ -35,8 +41,16 @@ function combineData(data) {
     let url = `http://webservice.fanart.tv/v3/tv/${showId}?api_key=${process.env.REACT_APP_FANART_API_KEY}`;
     return fanartApiCall(url)
     .then(fanartShows => {
+      // if we get 404
+      if (!fanartShows) {
+        show.imageUrl = 'Image not found';
+        return show;
+      }
       // sometimes there is to tvposter, we use tvthumb instead
-      let image = fanartShows.tvposter ? fanartShows.tvposter[0].url : fanartShows.tvthumb[0].url;
+      let image = 
+        fanartShows.tvposter ? fanartShows.tvposter[0].url 
+        : fanartShows.tvthumb ? fanartShows.tvthumb[0].url
+        : 'Image not found';
       show.imageUrl = image;
       return show;
     });

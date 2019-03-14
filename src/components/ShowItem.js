@@ -1,18 +1,18 @@
 import React from 'react';
 
-const ShowItem = ({number, ids, title, year, poster, description, watchers, status, rating}) => (
+const ShowItem = ({number, ids, title, year, poster, description, watchers, status, rating, genres}) => (
   <div className="divTableRow">
     <div id="number" className="divTableCell">
       {number}
-    </div>
-    <div id="show-id" className="divTableCell">
-      {ids}
     </div>
     <div id="title" className="divTableCell">
       {title}
     </div>
     <div id="year" className="divTableCell">
       {year}
+    </div>
+    <div id="genres" className="divTableCell">
+      {genres}
     </div>
     <div id="status" className="divTableCell">
       {status}
@@ -21,7 +21,10 @@ const ShowItem = ({number, ids, title, year, poster, description, watchers, stat
       {rating}
     </div>
     <div id="poster" className="divTableCell">
-      <img src={poster} alt="Show Poster" />
+      {(poster === 'Image not found') ?
+        (<p>Image not available</p>) :
+        (<img src={poster} alt="Show Poster" />)
+      } 
     </div>
     {watchers ? <div id="watchers" className="divTableCell">
       {watchers}

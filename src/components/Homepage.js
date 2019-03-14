@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Homepage = (props) => {
-  props.switchNavBar();
+  props.switchVisibility(false);
   return (
     <div>
       <h1>Welcome to my app!</h1>
