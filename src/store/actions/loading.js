@@ -1,18 +1,20 @@
 import { CHANGE_LOADING_STATE  } from '../actionTypes';
 
-export const changeLoadingState = (isLoading) => ({
-  type: CHANGE_LOADING_STATE ,
-  isLoading
+export const changeLoadingState = () => ({
+  type: CHANGE_LOADING_STATE,
 });
 
-export const changeLoadingStateFunction = (loading) => {
-  return async dispatch => {
-    try {
-      const isLoading = loading;
-      return dispatch(changeLoadingState(isLoading));
-    }
-    catch (err) {
-      console.log(err);
-    }
-  }
-}
+// export const changeLoadingState = (status) => {
+//   return dispatch => {
+//     try {
+//       if (status) {
+//         return dispatch(startLoading());
+//       } else {
+//         return dispatch(stopLoading());
+//       }
+//     }
+//     catch (err) {
+//       console.log(err);
+//     }
+//   }
+// }

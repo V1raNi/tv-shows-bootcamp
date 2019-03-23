@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPopShows, changeLoadingState } from '../store/actions/shows';
+// import { fetchPopShows, changeLoadingState } from '../store/actions/shows';
 import ShowItem from '../components/ShowItem';
 
 class PopularList extends Component {
@@ -43,4 +43,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchPopShows, changeLoadingState })(PopularList);
+export default connect(mapStateToProps, null)(PopularList);

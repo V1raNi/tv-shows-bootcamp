@@ -2,6 +2,7 @@ import React from 'react';
 
 import Dropdown from './Dropdown';
 import SearchBox from './SearchBox';
+import Pagination from './Pagination';
 
 const SearchArea = (props) => {
   
@@ -21,7 +22,9 @@ const SearchArea = (props) => {
     };
     props.sendQuery(queryContent);
   }
-  
+
+  // REFACTOR PROPS TO AVOID PASSING UNNECESSARY PROPS
+
   return (
     <div>
       {/* send functions that handle sending user input's data as props */}
@@ -29,6 +32,7 @@ const SearchArea = (props) => {
       <SearchBox sendQueryText={this.props.sendQuery} limit={this.props.limit} title={this.props.title} years={this.props.years} /> */}
       <Dropdown {...props} />
       <SearchBox {...props} handleReset={resetFilters} />
+      <Pagination {...props} />
     </div>
   )
 };

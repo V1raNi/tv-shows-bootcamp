@@ -1,0 +1,1 @@
+1. Where should I keep my state? I can keep my state in the Table (just like I do now), but another option is to move state to searchArea. 

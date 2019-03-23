@@ -5,7 +5,8 @@ import PopularList from './PopularList';
 import TrendingList from './TrendingList';
 import SearchArea from '../components/SearchArea';
 import queryHandler from '../helpers/queryHandler';
-import { fetchPopShows, fetchTrendShows, changeLoadingState } from '../store/actions/shows';
+import { fetchPopShows, fetchTrendShows } from '../store/actions/shows';
+import { changeLoadingState } from '../store/actions/loading';
 import TableHeader from '../components/TableHeader';
 import { fetchGenres } from '../store/actions/genres';
 
@@ -36,10 +37,10 @@ class Table extends Component {
   getShows = () => {
     const queryText = queryHandler(this.state);
     if (this.props.page === 'popular') {
-      this.props.changeLoadingState(true);
+      this.props.changeLoadingState();
       this.props.fetchPopShows(queryText);
     } else {
-      this.props.changeLoadingState(true);
+      this.props.changeLoadingState();
       this.props.fetchTrendShows(queryText);
     }
   }
@@ -73,20 +74,6 @@ class Table extends Component {
 
 
   render() {
-    // console.log(this.props.pages);
-    // const showItems = this.props.items;
-    // const showNumber = parseInt(showItems, 10);
-    // const limitPerPage = parseInt(this.state.limit, 10);
-    // const totalPages = Math.ceil(showNumber / limitPerPage);
-    // // <div className="links">
-    // //         <button>&laquo;</button>
-    // //         <button id="5" onClick={this.handleSubmit} className="active">1</button>
-    // //         <button>2</button>
-    // //         <button>3</button>
-    // //         <button>4</button>
-    // //         <button>&raquo;</button>
-    // //       </div>
-    // console.log(this.state);
     const isLoading = this.props.isLoading;
     let output;
     if (isLoading) {
@@ -94,7 +81,6 @@ class Table extends Component {
     } else {
       output = this.props.page === 'trending' ? <TrendingList /> : <PopularList />
     }
-
     return (
       <div>
         <SearchArea
@@ -103,6 +89,8 @@ class Table extends Component {
           title={this.state.title}
           years={this.state.years}
           genres={this.props.genres}
+          totalPages={this.props.pages.totalPages}
+          page={this.state.page}
         />
         <div className="divTable">
           <TableHeader page={this.props.page} />
@@ -117,8 +105,8 @@ class Table extends Component {
 function mapStateToProps(state) {
   return {
     shows: state.shows.popularShows,
-    pages: state.shows.pages,
-    isLoading: state.shows.isLoading,
+    pages: state.pages,
+    isLoading: state.loading,
     genres: state.genres
   }
 }

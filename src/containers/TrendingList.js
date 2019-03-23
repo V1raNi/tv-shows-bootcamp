@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchTrendShows, changeLoadingState } from '../store/actions/shows';
+// import { fetchTrendShows, changeLoadingState } from '../store/actions/shows';
 import ShowItem from '../components/ShowItem';
 class TrendingList extends Component {
   
@@ -42,4 +42,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchTrendShows, changeLoadingState })(TrendingList);
+export default connect(mapStateToProps, null)(TrendingList);

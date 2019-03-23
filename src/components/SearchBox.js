@@ -9,7 +9,7 @@ class SearchBox extends Component {
     const years = this.years.value;
     const genres = this.genres.state.value;
     const queryContent = {
-      page: 1,
+      page: '1',
       limit: this.props.limit,
       title,
       years,
