@@ -92,11 +92,18 @@ class Table extends Component {
           totalPages={this.props.pages.totalPages}
           page={this.state.page}
         />
-        <div className="divTable">
-          <TableHeader page={this.props.page} />
-          {output}
-          {/* get table footer here */}
-        </div>
+        {this.props.pages.totalPages !== '0'
+          ?
+            <div className="divTable">
+              <TableHeader page={this.props.page} />
+              {output}
+              {/* get table footer here */}
+            </div>
+          :
+          <div>
+            <p>Sorry, no results found!</p>
+          </div>
+        }
       </div>
     )
   }

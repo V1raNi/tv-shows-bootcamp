@@ -18,21 +18,21 @@ class SearchBox extends Component {
     this.props.sendQuery(queryContent);
   }
 
-
   render() {
     let options = this.props.genres.map(genre => {
       return { value: genre.slug, label: genre.name };
     });
+    console.log(this.props.years);
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="Title">Title (description):</label>
-        <input id="title" name="titleInput"  type="text" ref={titleInput => this.title = titleInput} defaultValue ={this.props.title}/>
+        <input id="title" name="titleInput"  type="text" ref={titleInput => this.title = titleInput} />
 
         <label htmlFor="Genres">Genres:</label>
-        <Select options={options} isMulti name="genres" ref={genresInput => this.genres = genresInput} defaultValue={[]} />
+        <Select options={options} isMulti name="genres" ref={genresInput => this.genres = genresInput}  />
 
         <label htmlFor="Year">Year:</label>
-        <input id="year" name="yearInput" type="number" min="1900" max="2019" ref={yearInput => this.years = yearInput} defaultValue ={this.props.years}/>
+        <input id="year" name="yearInput" type="number" min="1900" max="2019" ref={yearInput => this.years = yearInput} />
 
         <button type="submit">Search</button>
         <button type="button" onClick={this.props.handleReset}>Reset filters</button>
