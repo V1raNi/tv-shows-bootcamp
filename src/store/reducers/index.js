@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-// import popularShows from './popularShows';
-// import trendingShows from './trendingShows';
 import shows from './shows';
 import errors from './errors';
+import genres from './genres';
 
 const rootReducer = combineReducers({
   shows,
+  genres,
   errors
 });
 

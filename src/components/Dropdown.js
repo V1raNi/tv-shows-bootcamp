@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
-// import './style.css';
-
 
 class Dropdown extends Component {
-constructor(props) {
-  super(props);
-  this.state = {
-    displayMenu: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayMenu: false,
+    };
   };
-  this.showDropdownMenu = this.showDropdownMenu.bind(this);
-  this.hideDropdownMenu = this.hideDropdownMenu.bind(this);
-};
 
-  showDropdownMenu(event) {
+  showDropdownMenu = event => {
     event.preventDefault();
     this.setState({ displayMenu: true }, () => {
       document.addEventListener('click', this.hideDropdownMenu);
     });
   }
 
-  hideDropdownMenu() {
+  hideDropdownMenu = () => {
     this.setState({ displayMenu: false }, () => {
       document.removeEventListener('click', this.hideDropdownMenu);
     });
@@ -27,19 +23,22 @@ constructor(props) {
 
   handleSubmit = e => {
     e.preventDefault();
+    const limit = e.target.id;
     const queryContent = {
-      limit: e.target.id,
+      page: 1,
+      limit,
       title: this.props.title,
-      years: this.props.years
+      years: this.props.years,
+      genres: this.props.genres
     };
-    this.props.requestQuery(queryContent);
+    this.props.sendQuery(queryContent);
   }
 
-  // GENRES AND STATUS SHOULD BE SEARCHABLE DROPDOWNS - TO DO LATER PROBABLY, NEED TO DISCUSS IT WITH ALEXEY
+  
 
   render() {
     return (
-        <div className="dropdown" style = {{background:"gray", width:"200px"}}>
+        <div className="dropdown" style = {{backgroundColor:"#d8d8d8", width:"200px"}}>
         <div className="button" onClick={this.showDropdownMenu}>Show results on page:</div>
           { this.state.displayMenu && (
               <ul>

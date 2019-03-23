@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchTrendShows } from '../store/actions/shows';
+import { fetchTrendShows, changeLoadingState } from '../store/actions/shows';
 import ShowItem from '../components/ShowItem';
 class TrendingList extends Component {
   
-  componentDidMount() {
-    this.props.fetchTrendShows();
-  }
+  // componentDidMount() {
+  //   this.props.changeLoadingState(true);
+  //   this.props.fetchTrendShows();
+  // }
 
   render() {
     const { shows } = this.props;
@@ -41,4 +42,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchTrendShows })(TrendingList);
+export default connect(mapStateToProps, { fetchTrendShows, changeLoadingState })(TrendingList);

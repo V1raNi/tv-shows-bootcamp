@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ShowItem = ({number, ids, title, year, poster, description, watchers, status, rating, genres}) => (
+  // remove all id's!
   <div className="divTableRow">
     <div id="number" className="divTableCell">
       {number}

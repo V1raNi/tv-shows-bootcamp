@@ -1,53 +1,41 @@
 import React, { Component } from 'react';
-
+import Select from 'react-select';
 
 class SearchBox extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     titleInput: '',
-  //     yearInput: '',
-  //   }
-  // }
   
-  handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
   handleSubmit = e => {
     e.preventDefault();
     const title = this.title.value;
     const years = this.years.value;
+    const genres = this.genres.state.value;
     const queryContent = {
+      page: 1,
       limit: this.props.limit,
       title,
-      years
-      // title: this.state.titleInput,
-      // years: this.state.yearInput
+      years,
+      genres
     };
-    this.props.requestQuery(queryContent);
+    this.props.sendQuery(queryContent);
   }
 
+
   render() {
+    let options = this.props.genres.map(genre => {
+      return { value: genre.slug, label: genre.name };
+    });
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="Title">Title (description):</label>
-        {/* <input id="title" name="titleInput"  type="text" onChange={this.handleChange} value ={this.props.title}/> */}
         <input id="title" name="titleInput"  type="text" ref={titleInput => this.title = titleInput} defaultValue ={this.props.title}/>
 
-        {/* <label htmlFor="Genres">Genres:</label>
-        <input id="genres" name="genres" onChange={this.handleChange} type="text"/> */}
+        <label htmlFor="Genres">Genres:</label>
+        <Select options={options} isMulti name="genres" ref={genresInput => this.genres = genresInput} defaultValue={[]} />
 
         <label htmlFor="Year">Year:</label>
-        {/* <input id="year" name="yearInput" type="number" min="1900" max="2019" onChange={this.handleChange} value ={this.props.value}/> */}
-        <input id="year" name="yearInput" type="number" min="1900" max="2019" ref={yearInput => this.years = yearInput} defaultValue ={this.props.value}/>
+        <input id="year" name="yearInput" type="number" min="1900" max="2019" ref={yearInput => this.years = yearInput} defaultValue ={this.props.years}/>
 
-        {/* <label htmlFor="Status">Status:</label>
-        <input id="status" name="status" onChange={this.handleChange} type="text"/> */}
-        
         <button type="submit">Search</button>
+        <button type="button" onClick={this.props.handleReset}>Reset filters</button>
       </form>
     )
   }

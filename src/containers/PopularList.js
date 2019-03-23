@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchPopShows } from '../store/actions/shows';
+import { fetchPopShows, changeLoadingState } from '../store/actions/shows';
 import ShowItem from '../components/ShowItem';
 
 class PopularList extends Component {
   
-  componentDidMount() {
-    this.props.fetchPopShows();
-  }
+  // componentDidMount() {
+  //   this.props.changeLoadingState(true);
+  //   this.props.fetchPopShows();
+  // }
 
   render() {
     const { shows } = this.props;
@@ -42,4 +43,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { fetchPopShows })(PopularList);
+export default connect(mapStateToProps, { fetchPopShows, changeLoadingState })(PopularList);
