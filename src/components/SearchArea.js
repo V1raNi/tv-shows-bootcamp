@@ -11,17 +11,6 @@ const SearchArea = (props) => {
   //   this.props.sendQuery(queryText);
   // }
   
-  // console.log(props)
-  const resetFilters = () => {
-    const queryContent = {
-      page: 1,
-      limit: '10',
-      title: '',
-      years: '',
-      genres: []
-    };
-    props.sendQuery(queryContent);
-  }
 
   // REFACTOR PROPS TO AVOID PASSING UNNECESSARY PROPS
 
@@ -31,7 +20,7 @@ const SearchArea = (props) => {
       {/* <Dropdown sendQueryText={this.props.sendQuery} limit={this.props.limit} title={this.props.title} years={this.props.years} />
       <SearchBox sendQueryText={this.props.sendQuery} limit={this.props.limit} title={this.props.title} years={this.props.years} /> */}
       <Dropdown {...props} />
-      <SearchBox {...props} handleReset={resetFilters} />
+      <SearchBox {...props} />
       <Pagination {...props} />
     </div>
   )

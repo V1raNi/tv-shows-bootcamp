@@ -62,7 +62,13 @@ class Table extends Component {
   // }
 
   handleQueryChange = queryText => {
-    const { limit, page, title, years, genres } = queryText;
+    const {
+      limit = this.state.limit,
+      page = this.state.page,
+      title = this.state.title,
+      years = this.state.years,
+      genres = this.state.genres
+    } = queryText;
     this.setState({
       page,
       limit,
@@ -97,7 +103,6 @@ class Table extends Component {
             <div className="divTable">
               <TableHeader page={this.props.page} />
               {output}
-              {/* get table footer here */}
             </div>
           :
           <div>

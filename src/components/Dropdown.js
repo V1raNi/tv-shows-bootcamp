@@ -25,11 +25,8 @@ class Dropdown extends Component {
     e.preventDefault();
     const limit = e.target.id;
     const queryContent = {
-      page: '1',
       limit,
-      title: this.props.title,
-      years: this.props.years,
-      genres: this.props.genres
+      page: '1'
     };
     this.props.sendQuery(queryContent);
   }

@@ -63,11 +63,7 @@ class Pagination extends Component {
 
   gotoPage = page => {
     const queryContent = {
-      page,
-      limit: this.props.limit,
-      title: this.props.title,
-      years: this.props.years,
-      genres: this.props.genres
+      page
     };
     this.props.sendQuery(queryContent);
   }
