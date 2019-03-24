@@ -93,7 +93,8 @@ class Pagination extends Component {
     const currentPage = this.currentPage;
     return (
       <Fragment>
-        <nav aria-label="Countries Pagination">
+        <p>Page {this.props.page} out of {this.props.totalPages}</p>
+        <nav aria-label="Pagination">
           <ul className="pagination" >
             { pages.map((page, index) => {
 

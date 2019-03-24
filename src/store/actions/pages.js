@@ -1,7 +1,8 @@
 import { LOAD_PAGES } from '../actionTypes';
 
-export const loadPages = (pages) => ({
+export const loadPages = (currentPage, totalPages) => ({
   type: LOAD_PAGES,
-  pages
+  currentPage,
+  totalPages
 });
 

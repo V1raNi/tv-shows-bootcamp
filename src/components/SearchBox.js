@@ -34,16 +34,17 @@ class SearchBox extends Component {
     let options = this.props.genres.map(genre => {
       return { value: genre.slug, label: genre.name };
     });
+
     return (
       <form id="search-box" onSubmit={this.handleSubmit}>
-        <label htmlFor="Title">Title (description):</label>
-        <input id="title" name="titleInput"  type="text" ref={titleInput => this.titleRef = titleInput} defaultValue=''/>
-
-        <label htmlFor="Genres">Genres:</label>
+        <label htmlFor="genres">Genres:</label>
         <Select options={options} isMulti name="genres" ref={genresInput => this.genresRef = genresInput} defaultValue={[]} />
 
-        <label htmlFor="Year">Year:</label>
-        <input id="year" name="yearInput" type="number" min="1900" max="2019" ref={yearInput => this.yearsRef = yearInput} defaultValue=''/>
+        <label htmlFor="title">Title (description):</label>
+        <input id="title" name="title" type="text" ref={titleInput => this.titleRef = titleInput} defaultValue=''/>
+
+        <label htmlFor="year">Year:</label>
+        <input id="year" name="year" type="number" min="1900" max="2050" ref={yearInput => this.yearsRef = yearInput} defaultValue=''/>
 
         <button type="submit">Search</button>
         <button type="button" onClick={this.resetFilters}>Reset filters</button>

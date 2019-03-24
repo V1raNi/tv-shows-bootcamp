@@ -3,7 +3,6 @@ import { configureStore } from '../store';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import './App.css';
 import Main from './Main';
 import Navbar from '../components/Navbar';
 
@@ -27,7 +26,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div>
+          <div className="app">
             <Navbar navBarVisible={this.state.elementVisible} />
             <Main updateVisibility={this.changeVisibility} />
           </div>

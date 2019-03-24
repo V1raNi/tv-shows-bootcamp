@@ -9,19 +9,19 @@ const TableHeader = ({page}) => {
     // Popularity is calculated using the rating percentage and the number of ratings.
     // IT SEEMS WE NEED TO CREATE COME SORT OF 'DEFAULT' SORTING STATE AND MAKE IF SORTED = ASC || DEFAULT
     // ADD SOME LINE LIKE SORTED BY: ...
-    <div className="divTableHeading">
-      <div className="divTableRow">
-        <div className="divTableHead">Number</div>
-        <div className="divTableHead">Title</div>
-        <div className="divTableHead">Year</div>
-        <div className="divTableHead">Genres</div>
-        <div className="divTableHead">Status</div>
-        <div className="divTableHead">Rating</div>
-        <div className="divTableHead">Poster</div>
+    <div className="table-heading">
+      <div className="table-row">
+        <div className="table-head">Number</div>
+        <div className="table-head">Title</div>
+        <div className="table-head">Year</div>
+        <div className="table-head">Genres</div>
+        <div className="table-head">Status</div>
+        <div className="table-head">Rating</div>
+        <div className="table-head">Poster</div>
         {page === 'trending' && (
-          <div className="divTableHead">Watchers</div>
+          <div className="table-head">Watchers</div>
         )}
-        <div className="divTableHead">Description</div>
+        <div className="table-head">Description</div>
       </div>
     </div>
   )

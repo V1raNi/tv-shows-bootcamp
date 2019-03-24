@@ -7,22 +7,20 @@ const Navbar = (props) => {
   }
 
   return (
-    <nav>
-      <div>
-        <div>
-          <Link to="/">
-            Homepage
-          </Link>
-        </div>
-        <ul>
-          <li>
-            <Link to="/popular">Popular</Link>
-          </li>
-          <li>
-            <Link to="/trending">Trending</Link>
-          </li>
-        </ul>
+    <nav aria-label="Navigation" className="navbar">
+      <div className="navbar-homepage">
+        <Link to="/">
+          Homepage
+        </Link>
       </div>
+      <ul className="navbar-links">
+        <li>
+          <Link to="/popular">Popular</Link>
+        </li>
+        <li>
+          <Link to="/trending">Trending</Link>
+        </li>
+      </ul>
     </nav>
   );
 }

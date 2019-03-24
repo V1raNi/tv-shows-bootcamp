@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import { fetchPopShows, changeLoadingState } from '../store/actions/shows';
 import ShowItem from '../components/ShowItem';
 
 class PopularList extends Component {
   
-  // componentDidMount() {
-  //   this.props.changeLoadingState(true);
-  //   this.props.fetchPopShows();
-  // }
-
   render() {
-    const { shows } = this.props;
+    const { shows, onPage, page } = this.props;
     let showsList = shows.map((show, i) => {
       const genres = show.genres.join(', ');
       const rating = show.rating.toFixed(2);
+      const number = (page - 1) * onPage + i + 1;
       return <ShowItem
         key={show.ids.trakt}
-        number={i + 1}
+        number={number}
         title={show.title}
         year={show.year}
         status={show.status}
@@ -30,7 +25,7 @@ class PopularList extends Component {
     });
 
     return(
-      <div className="divTableBody">
+      <div className="table-body">
         {showsList}
       </div>
     )
@@ -39,7 +34,8 @@ class PopularList extends Component {
 
 function mapStateToProps(state) {
   return {
-    shows: state.shows.popularShows
+    shows: state.shows.popularShows,
+    page: state.pages.currentPage
   }
 }
 

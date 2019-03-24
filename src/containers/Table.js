@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
+// import SortingArea from './SortingArea';
 import PopularList from './PopularList';
 import TrendingList from './TrendingList';
+import TableHeader from '../components/TableHeader';
+import Pagination from '../components/Pagination.js';
 import SearchArea from '../components/SearchArea';
-import queryHandler from '../helpers/queryHandler';
 import { fetchPopShows, fetchTrendShows } from '../store/actions/shows';
 import { changeLoadingState } from '../store/actions/loading';
-import TableHeader from '../components/TableHeader';
 import { fetchGenres } from '../store/actions/genres';
+import queryHandler from '../helpers/queryHandler';
 
 class Table extends Component {
   constructor(props) {
@@ -30,17 +32,23 @@ class Table extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.page !== prevProps.page) {
-      this.getShows();
+      this.setState({
+        page: '1',
+        limit: '10',
+        title: '',
+        years: '',
+        genres: []
+      }, () => this.getShows());
     }
   }
 
+  // there is a bug: if loading takes too much, changing page brakes the loading state
   getShows = () => {
     const queryText = queryHandler(this.state);
+    this.props.changeLoadingState();
     if (this.props.page === 'popular') {
-      this.props.changeLoadingState();
       this.props.fetchPopShows(queryText);
     } else {
-      this.props.changeLoadingState();
       this.props.fetchTrendShows(queryText);
     }
   }
@@ -79,44 +87,74 @@ class Table extends Component {
   }
 
 
-  render() {
+  renderTable = () => {
+    const pagination = (
+      <Pagination
+        page={this.state.page}
+        sendQuery={this.handleQueryChange}
+        totalPages={this.props.pages.totalPages}
+      />
+    );
     const isLoading = this.props.isLoading;
-    let output;
+
     if (isLoading) {
-      output = <div>Loading...</div>
-    } else {
-      output = this.props.page === 'trending' ? <TrendingList /> : <PopularList />
+      return (<div className="loading">Loading...</div>);
     }
+
+    if (this.props.page === 'trending') {
+      return (
+        <Fragment>
+          {pagination}
+          <div className="table">
+            <TableHeader page={this.props.page} />
+            <TrendingList onPage={this.state.limit} />
+          </div>
+          {pagination}
+        </Fragment>
+      );
+    } else {
+      return (
+        <Fragment>
+          {pagination}
+          <div className="table">
+            <TableHeader page={this.props.page} />
+            <PopularList onPage={this.state.limit} />
+          </div>
+          {pagination}
+        </Fragment>
+      );
+    }
+  }
+
+  render() {
+    
+
     return (
-      <div>
+      <Fragment>
         <SearchArea
           sendQuery={this.handleQueryChange}
-          limit={this.state.limit}
-          title={this.state.title}
-          years={this.state.years}
           genres={this.props.genres}
-          totalPages={this.props.pages.totalPages}
-          page={this.state.page}
         />
+        {/* <SortingArea 
+          page={this.props.page}
+        /> */}
         {this.props.pages.totalPages !== '0'
           ?
-            <div className="divTable">
-              <TableHeader page={this.props.page} />
-              {output}
+            <div className="content">
+              {this.renderTable()}
             </div>
           :
-          <div>
+          <div className="no-content">
             <p>Sorry, no results found!</p>
           </div>
         }
-      </div>
+      </Fragment>
     )
   }
 }
 
 function mapStateToProps(state) {
   return {
-    shows: state.shows.popularShows,
     pages: state.pages,
     isLoading: state.loading,
     genres: state.genres

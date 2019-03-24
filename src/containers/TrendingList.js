@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import { fetchTrendShows, changeLoadingState } from '../store/actions/shows';
 import ShowItem from '../components/ShowItem';
 class TrendingList extends Component {
-  
-  // componentDidMount() {
-  //   this.props.changeLoadingState(true);
-  //   this.props.fetchTrendShows();
-  // }
 
   render() {
-    const { shows } = this.props;
+    const { shows, onPage, page } = this.props;
     let showsList = shows.map((show, i) => {
       const genres = show.show.genres.join(', ');
       const rating = show.show.rating.toFixed(2);
+      const number = (page - 1) * onPage + i + 1;
       return <ShowItem
         key={show.show.ids.trakt}
-        number={i + 1}
+        number={number}
         title={show.show.title}
         watchers={show.watchers}
         year={show.show.year}
@@ -29,7 +24,7 @@ class TrendingList extends Component {
       />
     });
     return(
-      <div className="divTableBody">
+      <div className="table-body">
         {showsList}
       </div>
     )
@@ -38,7 +33,8 @@ class TrendingList extends Component {
 
 function mapStateToProps(state) {
   return {
-    shows: state.shows.trendingShows
+    shows: state.shows.trendingShows,
+    page: state.pages.currentPage
   }
 }
 

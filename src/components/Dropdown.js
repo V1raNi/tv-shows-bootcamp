@@ -1,55 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Select from 'react-select';
 
-class Dropdown extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayMenu: false,
-    };
-  };
+const Dropdown = (props) => {
 
-  showDropdownMenu = event => {
-    event.preventDefault();
-    this.setState({ displayMenu: true }, () => {
-      document.addEventListener('click', this.hideDropdownMenu);
-    });
-  }
+  const options = [
+    {value: '5', label: '5'},
+    {value: '10', label: '10'},
+    {value: '15', label: '15'},
+    {value: '20', label: '20'},
+    {value: '25', label: '25'}
+  ];
 
-  hideDropdownMenu = () => {
-    this.setState({ displayMenu: false }, () => {
-      document.removeEventListener('click', this.hideDropdownMenu);
-    });
-  }
-
-  handleSubmit = e => {
-    e.preventDefault();
-    const limit = e.target.id;
+  const handleSubmit = e => {
+    const limit = e.value;
     const queryContent = {
       limit,
       page: '1'
     };
-    this.props.sendQuery(queryContent);
+    props.sendQuery(queryContent);
   }
 
-  render() {
-    return (
-        <div className="dropdown" style = {{backgroundColor:"#d8d8d8", width:"200px"}}>
-        <div className="button" onClick={this.showDropdownMenu}>Show results on page:</div>
-          { this.state.displayMenu && (
-              <ul>
-                <li><button id="5" onClick={this.handleSubmit}>5</button></li>
-                <li><button id="10" onClick={this.handleSubmit}>10</button></li>
-                <li><button id="15" onClick={this.handleSubmit}>15</button></li>
-                <li><button id="20" onClick={this.handleSubmit}>20</button></li>
-                <li><button id="25" onClick={this.handleSubmit}>25</button></li>
-              </ul>
-            )
-          }
-
-      </div>
-
-    );
-  }
+  return (
+    <div className="shows-limit">
+      <label htmlFor="limit-dropdown">Results on page:</label>
+      <Select
+        className="limit-dropdown"
+        defaultValue={options[1]}
+        name="limit-dropdown"
+        options={options}
+        onChange={handleSubmit}
+      />
+    </div>
+  )
 }
 
 export default Dropdown;
