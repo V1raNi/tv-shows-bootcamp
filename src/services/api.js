@@ -11,6 +11,7 @@ export function apiCall(url) {
     })
     .catch(err => {
       console.log(err);
+      errorHandling(err);
     });
 }
 
@@ -70,7 +71,7 @@ function fanartApiCall(url) {
 function combineData(data) {
   let showsPromises = data.map(show => {
     let showId = show.show ? show.show.ids.tvdb : show.ids.tvdb;
-    let url = `http://webservice.fanart.tv/v3/tv/${showId}?api_key=${process.env.REACT_APP_FANART_API_KEY}`;
+    let url = `https://webservice.fanart.tv/v3/tv/${showId}?api_key=${process.env.REACT_APP_FANART_API_KEY}`;
     return fanartApiCall(url)
     .then(fanartShows => {
       // if we get 404 and there is no fanartShows
