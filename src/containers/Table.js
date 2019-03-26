@@ -54,22 +54,6 @@ class Table extends Component {
     }
   }
 
-  // for version with controlled inputs
-  // handleChange = e => {
-  //   if (e.target === undefined && typeof e === 'object') {
-  //     let genres = e.map(genre => {
-  //       return genre.value;
-  //     });
-  //     this.setState({
-  //       genres
-  //     });
-  //   } else {
-  //     this.setState({
-  //       [e.target.name]: e.target.value
-  //     });
-  //   }
-  // }
-
   handleQueryChange = queryText => {
     const {
       limit = this.state.limit,
@@ -86,7 +70,6 @@ class Table extends Component {
       genres
     }, () => this.getShows());
   }
-
 
   renderTable = () => {
     const pagination = (

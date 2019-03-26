@@ -64,7 +64,7 @@ const ShowItem = ({number, title, year, poster, description, watchers, status, r
         {(poster === 'Image not found')
           ?
             <img src={imagePlaceholder} alt="Not available" className="poster" />
-            :
+          :
             <div className="image">
               <img onClick={onImgClick} src={poster} alt={`Poster of ${title}`} className="poster"/>
               <div className="modal" ref={modal}>
@@ -73,7 +73,7 @@ const ShowItem = ({number, title, year, poster, description, watchers, status, r
                 <p className="caption">{`Poster of ${title}`}</p>
               </div>
             </div>
-        } 
+        }
       </div>
       {watchers
         ?

@@ -1,9 +1,6 @@
 export function apiCall(url) {
   return traktApiCall(url)
     .then(async (data) => {
-      // let shows = combineData(data[0]).then(result => shows = result);
-      // need to figure out if there is a way to do that without Promise.all
-      // const finalData = Promise.all([shows, items]);
       const shows = await combineData(data[0]);
       const pages = data[1];
       const finalData = [shows, pages];

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
 
 const LEFT_PAGE = 'LEFT';
 const RIGHT_PAGE = 'RIGHT';
@@ -101,7 +100,6 @@ class Pagination extends Component {
                 <li key={index} className="page-item">
                   <button className="page-link" href="#" aria-label="Previous" onClick={this.handleMoveLeft}>
                     <span aria-hidden="true">&laquo;</span>
-                    {/* <span className="sr-only">Previous</span> */}
                   </button>
                 </li>
               );
@@ -110,7 +108,6 @@ class Pagination extends Component {
                 <li key={index} className="page-item">
                   <button className="page-link" href="#" aria-label="Next" onClick={this.handleMoveRight}>
                     <span aria-hidden="true">&raquo;</span>
-                    {/* <span className="sr-only">Next</span> */}
                   </button>
                 </li>
               );
@@ -120,9 +117,8 @@ class Pagination extends Component {
                   <button className={`page-link${ currentPage === page ? ' active' : ''}`} href="#" onClick={ this.handleClick(page) }>{ page }</button>
                 </li>
               );
-
-            }) }
-
+            })
+            }
           </ul>
         </nav>
       </div>

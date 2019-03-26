@@ -285,6 +285,9 @@ button:hover:not(.active),
 .table-body {
   display: table-row-group;
 }
+.read-more {
+  cursor: pointer;
+}
 img.poster {
   width: 150px;
   height: auto;
