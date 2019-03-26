@@ -5,6 +5,7 @@ import ShowItem from '../components/ShowItem';
 class TrendingList extends Component {
 
   render() {
+    
     const { shows, onPage, page } = this.props;
     let showsList = shows.map((show, i) => {
       const genres = show.show.genres.join(', ');

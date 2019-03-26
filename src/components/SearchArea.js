@@ -12,8 +12,8 @@ const SearchArea = (props) => {
   
   return (
     <div className="search-area">
-      <Dropdown sendQuery={props.sendQuery} />
       <SearchBox sendQuery={props.sendQuery} genres={props.genres}/>
+      <Dropdown sendQuery={props.sendQuery} limit={props.limit} />
     </div>
   )
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = (props) => {
   if (!props.navBarVisible) {
@@ -15,10 +15,10 @@ const Navbar = (props) => {
       </div>
       <ul className="navbar-links">
         <li>
-          <Link to="/popular">Popular</Link>
+          <NavLink activeClassName="nav-active" to="/popular">Popular</NavLink>
         </li>
         <li>
-          <Link to="/trending">Trending</Link>
+          <NavLink activeClassName="nav-active" to="/trending">Trending</NavLink>
         </li>
       </ul>
     </nav>

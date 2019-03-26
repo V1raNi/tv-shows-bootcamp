@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 
 const LEFT_PAGE = 'LEFT';
@@ -16,6 +16,7 @@ const range = (from, to) => {
   return range;
 }
 
+// probably can be rewritten into the stateless functional component
 class Pagination extends Component {
 
   fetchPageNumbers = () => {
@@ -83,42 +84,40 @@ class Pagination extends Component {
   handleMoveRight = e => {
     e.preventDefault();
     const currentPage = parseInt(this.props.page, 10);
-    // (this.pageNeighbors * 2) + 1
-    this.gotoPage(currentPage + 5);
+    this.gotoPage(currentPage + 3);
   }
 
   render() {
     if (this.totalPages === 1) return null;
     const pages = this.fetchPageNumbers();
-    const currentPage = this.currentPage;
+    const currentPage = parseInt(this.props.page, 10);
     return (
-      <Fragment>
+      <div className="pagination-container">
         <p>Page {this.props.page} out of {this.props.totalPages}</p>
         <nav aria-label="Pagination">
-          <ul className="pagination" >
+          <ul className="pagination">
             { pages.map((page, index) => {
-
               if (page === LEFT_PAGE) return (
-                <li key={index} className="page-item" style={{display: 'inline'}}>
+                <li key={index} className="page-item">
                   <button className="page-link" href="#" aria-label="Previous" onClick={this.handleMoveLeft}>
                     <span aria-hidden="true">&laquo;</span>
-                    <span className="sr-only">Previous</span>
+                    {/* <span className="sr-only">Previous</span> */}
                   </button>
                 </li>
               );
 
               if (page === RIGHT_PAGE) return (
-                <li key={index} className="page-item" style={{display: 'inline'}}>
+                <li key={index} className="page-item">
                   <button className="page-link" href="#" aria-label="Next" onClick={this.handleMoveRight}>
                     <span aria-hidden="true">&raquo;</span>
-                    <span className="sr-only">Next</span>
+                    {/* <span className="sr-only">Next</span> */}
                   </button>
                 </li>
               );
 
               return (
-                <li key={index} className={`page-item${ currentPage === page ? ' active' : ''}`} style={{display: 'inline'}}>
-                  <button className="page-link" href="#" onClick={ this.handleClick(page) }>{ page }</button>
+                <li key={index} className="page-item">
+                  <button className={`page-link${ currentPage === page ? ' active' : ''}`} href="#" onClick={ this.handleClick(page) }>{ page }</button>
                 </li>
               );
 
@@ -126,7 +125,7 @@ class Pagination extends Component {
 
           </ul>
         </nav>
-      </Fragment>
+      </div>
     );
   }
 }

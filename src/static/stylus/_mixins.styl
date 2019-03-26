@@ -1,0 +1,28 @@
+vendorize(prop, args)
+    -webkit-{prop}: args
+    -moz-{prop}: args
+    -o-{prop}: args
+    {prop}: args
+
+select-formatting(name)
+    margin: 5px 3px
+    & .{name}__menu
+        background-color: first-color
+    & .{name}__control
+        background-color: first-color
+        border: 1px solid rgba(fourth-color, 0.7)
+        & .{name}__dropdown-indicator
+            padding: 5px
+        &:hover
+            border: 1px solid fourth-color
+    & .{name}__control--is-focused
+        box-shadow: none
+
+border-radius()
+    vendorize("border-radius", arguments)
+
+box-shadow()
+    vendorize("box-shadow", arguments)
+
+transform()
+    vendorize("transform", arguments)

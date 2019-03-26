@@ -93,12 +93,13 @@ class Table extends Component {
         page={this.state.page}
         sendQuery={this.handleQueryChange}
         totalPages={this.props.pages.totalPages}
+        className="pagination"
       />
     );
     const isLoading = this.props.isLoading;
 
     if (isLoading) {
-      return (<div className="loading">Loading...</div>);
+      return (<div className="loading"></div>);
     }
 
     if (this.props.page === 'trending') {
@@ -126,15 +127,46 @@ class Table extends Component {
     }
   }
 
-  render() {
-    
+  renderHeading = () => {
+    let result = [];
+    if (this.state.years !== '') {
+      result.push(`${this.state.years} year`);
+    }
+    if (this.state.title !== '') {
+      result.push(`"${this.state.title}" title`);
+    }
 
+    let genresList = this.state.genres.map(genre => {
+      return genre.label;
+    });
+
+    if (genresList.length === 1) {
+      result.push(`"${genresList[0]}" genre`);
+    } else if (genresList > 1) {
+      result.push(`"${genresList.join(', ')}" genres`);
+    }
+
+    if (result.length > 0) {
+      return `Showing results filtered by: ${result.join(', ')}`;
+    } else {
+      return null;
+    }
+  }
+
+  render() {
     return (
       <Fragment>
+        {this.props.page === 'popular' ?
+          <h2>Discover the most popular TV shows</h2>
+          :
+          <h2>See what TV shows are trending right now</h2>
+        }
         <SearchArea
           sendQuery={this.handleQueryChange}
           genres={this.props.genres}
-        />
+          limit={this.state.limit}
+          />
+        <h3>{this.renderHeading()}</h3>
         {/* <SortingArea 
           page={this.props.page}
         /> */}

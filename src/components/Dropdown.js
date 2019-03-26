@@ -25,6 +25,7 @@ const Dropdown = (props) => {
       <label htmlFor="limit-dropdown">Results on page:</label>
       <Select
         className="limit-dropdown"
+        classNamePrefix="limit-dropdown"
         defaultValue={options[1]}
         name="limit-dropdown"
         options={options}

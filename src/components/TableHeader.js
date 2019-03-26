@@ -11,7 +11,7 @@ const TableHeader = ({page}) => {
     // ADD SOME LINE LIKE SORTED BY: ...
     <div className="table-heading">
       <div className="table-row">
-        <div className="table-head">Number</div>
+        <div className="table-head">№</div>
         <div className="table-head">Title</div>
         <div className="table-head">Year</div>
         <div className="table-head">Genres</div>
