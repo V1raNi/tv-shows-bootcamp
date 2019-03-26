@@ -129,7 +129,7 @@ class Table extends Component {
 
     if (genresList.length === 1) {
       result.push(`"${genresList[0]}" genre`);
-    } else if (genresList > 1) {
+    } else if (genresList.length > 1) {
       result.push(`"${genresList.join(', ')}" genres`);
     }
 
