@@ -102,7 +102,7 @@ function errorHandling(response) {
             throw err;
         });
       } else {
-        let err = {errorMessage: 'Try again later, server is not responding'};
+        let err = {errorMessage: 'Oops! Something went wrong. Please try again later.'};
         throw err;
       }
   }

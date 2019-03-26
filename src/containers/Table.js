@@ -24,6 +24,7 @@ class Table extends Component {
     }
   }
 
+
   componentDidMount() {
     this.props.switchVisibility(true);
     this.getShows();
@@ -102,6 +103,10 @@ class Table extends Component {
       return (<div className="loading"></div>);
     }
 
+    if (this.props.error !== null) {
+      return (<h3>{this.props.error}</h3>);
+    }
+
     if (this.props.page === 'trending') {
       return (
         <Fragment>
@@ -154,6 +159,7 @@ class Table extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <Fragment>
         {this.props.page === 'popular' ?
@@ -177,7 +183,7 @@ class Table extends Component {
             </div>
           :
           <div className="no-content">
-            <p>Sorry, no results found!</p>
+            <h3>Sorry, no results found!</h3>
           </div>
         }
       </Fragment>
@@ -189,7 +195,8 @@ function mapStateToProps(state) {
   return {
     pages: state.pages,
     isLoading: state.loading,
-    genres: state.genres
+    genres: state.genres,
+    error: state.errors.message
   }
 }
 
