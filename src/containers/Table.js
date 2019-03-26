@@ -35,7 +35,6 @@ class Table extends Component {
     if (this.props.page !== prevProps.page) {
       this.setState({
         page: '1',
-        limit: '10',
         title: '',
         years: '',
         genres: []
