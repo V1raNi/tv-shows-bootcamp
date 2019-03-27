@@ -240,8 +240,11 @@ button.page-link,
   padding: 3px 10px;
 }
 button:hover:not(.active),
-.btn:hover:not(.active) {
+.btn:hover:not(.active),
+button:focus:not(.active),
+.btn:focus:not(.active) {
   border: 1px solid #e3fdfd;
+  outline: none;
   margin: 2px;
 }
 .active {
@@ -250,9 +253,10 @@ button:hover:not(.active),
   text-shadow: 1px 1px #39a0a6;
 }
 .table {
-  display: table;
+  display: block;
   width: 100%;
   background-color: #cbf1f5;
+  overflow: auto;
 }
 .table .description {
   text-align: justify;

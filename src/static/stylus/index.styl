@@ -167,9 +167,10 @@ button
         border: 1px solid rgba(fourth-color, 1)
     &.page-link
         padding: 3px 10px
-    &:hover
+    &:hover, &:focus
         &:not(.active)
             border: 1px solid first-color
+            outline: none
             margin: 2px
 
 .active
@@ -178,9 +179,10 @@ button
     text-shadow: 1px 1px darken(fourth-color, 30%)
 
 .table
-    display: table
+    display: block
     width: 100%
     background-color: second-color
+    overflow auto
     & .description
         text-align: justify
 
