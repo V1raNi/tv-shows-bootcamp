@@ -27,7 +27,7 @@ const ShowItem = ({number, title, year, poster, description, watchers, status, r
   }
 
   const renderDescription = () => {
-    if (description.length > 350) {
+    if ( description !== null && description.length > 350) {
       const descriptionFragment = description.substring(0, 350);
       const result = (
         <p className="description" ref={descriptionRef}>
@@ -85,9 +85,13 @@ const ShowItem = ({number, title, year, poster, description, watchers, status, r
       }
       <div className="table-cell">
         {renderDescription()}
-      { description.length > 350 && (
-        <p className="read-more" onClick={onDescriptionClick}><strong>Show more</strong></p>
-      )}
+      { description !== null ?
+        description.length > 350 && (
+          <p className="read-more" onClick={onDescriptionClick}><strong>Show more</strong></p>
+        )
+        :
+          <p>Description is not available</p>
+      }
       </div>
     </div>
   );

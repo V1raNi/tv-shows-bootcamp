@@ -141,7 +141,6 @@ class Table extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <Fragment>
         {this.props.page === 'popular' ?
