@@ -1,24 +1,24 @@
 import React from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 
-const Dropdown = (props) => {
-
+const Dropdown = props => {
   const options = [
-    {value: '5', label: '5'},
-    {value: '10', label: '10'},
-    {value: '15', label: '15'},
-    {value: '20', label: '20'},
-    {value: '25', label: '25'}
+    { value: '5', label: '5' },
+    { value: '10', label: '10' },
+    { value: '15', label: '15' },
+    { value: '20', label: '20' },
+    { value: '25', label: '25' },
   ];
 
   const handleSubmit = e => {
     const limit = e.value;
     const queryContent = {
       limit,
-      page: '1'
+      page: '1',
     };
     props.sendQuery(queryContent);
-  }
+  };
 
   return (
     <div className="shows-limit">
@@ -32,7 +32,11 @@ const Dropdown = (props) => {
         onChange={handleSubmit}
       />
     </div>
-  )
-}
+  );
+};
+
+Dropdown.propTypes = {
+  sendQuery: PropTypes.func.isRequired,
+};
 
 export default Dropdown;

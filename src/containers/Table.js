@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-// import SortingArea from './SortingArea';
 import PopularList from './PopularList';
 import TrendingList from './TrendingList';
 import TableHeader from '../components/TableHeader';
-import Pagination from '../components/Pagination.js';
+import Pagination from '../components/Pagination';
 import SearchArea from '../components/SearchArea';
 import { fetchPopShows, fetchTrendShows } from '../store/actions/shows';
 import { changeLoadingState } from '../store/actions/loading';
@@ -20,10 +20,9 @@ class Table extends Component {
       limit: '10',
       title: '',
       years: '',
-      genres: []
-    }
+      genres: [],
+    };
   }
-
 
   componentDidMount() {
     this.props.switchVisibility(true);
@@ -33,16 +32,18 @@ class Table extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.page !== prevProps.page) {
-      this.setState({
-        page: '1',
-        title: '',
-        years: '',
-        genres: []
-      }, () => this.getShows());
+      this.setState(
+        {
+          page: '1',
+          title: '',
+          years: '',
+          genres: [],
+        },
+        () => this.getShows(),
+      );
     }
   }
 
-  // there is a bug: if loading takes too much, changing page brakes the loading state
   getShows = () => {
     const queryText = queryHandler(this.state);
     this.props.changeLoadingState();
@@ -51,7 +52,7 @@ class Table extends Component {
     } else {
       this.props.fetchTrendShows(queryText);
     }
-  }
+  };
 
   handleQueryChange = queryText => {
     const {
@@ -59,18 +60,22 @@ class Table extends Component {
       page = this.state.page,
       title = this.state.title,
       years = this.state.years,
-      genres = this.state.genres
+      genres = this.state.genres,
     } = queryText;
-    this.setState({
-      page,
-      limit,
-      title,
-      years,
-      genres
-    }, () => this.getShows());
-  }
+    this.setState(
+      {
+        page,
+        limit,
+        title,
+        years,
+        genres,
+      },
+      () => this.getShows(),
+    );
+  };
 
   renderTable = () => {
+    const { isLoading, page, error } = this.props;
     const pagination = (
       <Pagination
         page={this.state.page}
@@ -79,43 +84,41 @@ class Table extends Component {
         className="pagination"
       />
     );
-    const isLoading = this.props.isLoading;
 
     if (isLoading) {
-      return (<div className="loading"></div>);
+      return <div className="loading" />;
     }
 
-    if (this.props.error !== null) {
-      return (<h3>{this.props.error}</h3>);
+    if (error !== 'No error') {
+      return <h3>{error}</h3>;
     }
 
-    if (this.props.page === 'trending') {
+    if (page === 'trending') {
       return (
         <Fragment>
           {pagination}
           <div className="table">
-            <TableHeader page={this.props.page} />
+            <TableHeader page={page} />
             <TrendingList onPage={this.state.limit} />
           </div>
           {pagination}
         </Fragment>
       );
-    } else {
-      return (
-        <Fragment>
-          {pagination}
-          <div className="table">
-            <TableHeader page={this.props.page} />
-            <PopularList onPage={this.state.limit} />
-          </div>
-          {pagination}
-        </Fragment>
-      );
     }
-  }
+    return (
+      <Fragment>
+        {pagination}
+        <div className="table">
+          <TableHeader page={page} />
+          <PopularList onPage={this.state.limit} />
+        </div>
+        {pagination}
+      </Fragment>
+    );
+  };
 
   renderHeading = () => {
-    let result = [];
+    const result = [];
     if (this.state.years !== '') {
       result.push(`${this.state.years} year`);
     }
@@ -123,7 +126,7 @@ class Table extends Component {
       result.push(`"${this.state.title}" title`);
     }
 
-    let genresList = this.state.genres.map(genre => {
+    const genresList = this.state.genres.map(genre => {
       return genre.label;
     });
 
@@ -135,40 +138,34 @@ class Table extends Component {
 
     if (result.length > 0) {
       return `Showing results filtered by: ${result.join(', ')}`;
-    } else {
-      return null;
     }
-  }
+
+    return null;
+  };
 
   render() {
     return (
       <Fragment>
-        {this.props.page === 'popular' ?
+        {this.props.page === 'popular' ? (
           <h2>Discover the most popular TV shows</h2>
-          :
+        ) : (
           <h2>See what TV shows are trending right now</h2>
-        }
+        )}
         <SearchArea
           sendQuery={this.handleQueryChange}
           genres={this.props.genres}
           limit={this.state.limit}
-          />
+        />
         <h3>{this.renderHeading()}</h3>
-        {/* <SortingArea 
-          page={this.props.page}
-        /> */}
-        {this.props.pages.totalPages !== '0'
-          ?
-            <div className="content">
-              {this.renderTable()}
-            </div>
-          :
+        {this.props.pages.totalPages !== '0' ? (
+          <div className="content">{this.renderTable()}</div>
+        ) : (
           <div className="no-content">
             <h3>Sorry, no results found!</h3>
           </div>
-        }
+        )}
       </Fragment>
-    )
+    );
   }
 }
 
@@ -177,8 +174,24 @@ function mapStateToProps(state) {
     pages: state.pages,
     isLoading: state.loading,
     genres: state.genres,
-    error: state.errors.message
-  }
+    error: state.errors.message,
+  };
 }
 
-export default connect(mapStateToProps, { fetchPopShows, fetchTrendShows, changeLoadingState, fetchGenres })(Table);
+Table.propTypes = {
+  switchVisibility: PropTypes.func.isRequired,
+  fetchGenres: PropTypes.func.isRequired,
+  page: PropTypes.string.isRequired,
+  changeLoadingState: PropTypes.func.isRequired,
+  fetchPopShows: PropTypes.func.isRequired,
+  fetchTrendShows: PropTypes.func.isRequired,
+  genres: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  pages: PropTypes.objectOf(PropTypes.string).isRequired,
+  error: PropTypes.string.isRequired,
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchPopShows, fetchTrendShows, changeLoadingState, fetchGenres },
+)(Table);

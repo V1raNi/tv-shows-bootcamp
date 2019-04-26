@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   genres,
   errors,
   loading,
-  pages
+  pages,
 });
 
 export default rootReducer;

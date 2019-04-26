@@ -1,9 +1,9 @@
 import { getGenres } from '../../services/api';
 import { GET_GENRES } from '../actionTypes';
 
-export const loadGenres = (genres) => ({
+export const loadGenres = genres => ({
   type: GET_GENRES,
-  genres
+  genres,
 });
 
 export const fetchGenres = () => {
@@ -11,9 +11,8 @@ export const fetchGenres = () => {
     try {
       const data = await getGenres();
       return dispatch(loadGenres(data));
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err);
     }
-  }
-}
+  };
+};

@@ -1,9 +1,9 @@
 import { CHANGE_LOADING_STATE } from '../actionTypes';
 
 export default (state = false, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case CHANGE_LOADING_STATE:
-        return !state;
+      return !state;
     default:
       return state;
   }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { configureStore } from '../store';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import Main from './Main';
+import configureStore from '../store';
+import Main from '../components/Main';
 import Navbar from '../components/Navbar';
 
 const store = configureStore();
@@ -12,15 +12,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      elementVisible: false
-    }
+      elementVisible: false,
+    };
   }
 
   changeVisibility = value => {
     this.setState({
-      elementVisible: value
+      elementVisible: value,
     });
-  }
+  };
 
   render() {
     return (
@@ -32,8 +32,8 @@ class App extends Component {
           </div>
         </Router>
       </Provider>
-    )
+    );
   }
-};
+}
 
 export default App;

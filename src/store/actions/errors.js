@@ -3,16 +3,16 @@ import { changeLoadingState } from './loading';
 
 export const addError = error => ({
   type: ADD_ERROR,
-  error
+  error,
 });
 
 export const removeError = () => ({
-  type: REMOVE_ERROR
+  type: REMOVE_ERROR,
 });
 
 export const addErrorProcess = error => {
   return dispatch => {
     dispatch(addError(error));
     dispatch(changeLoadingState());
-  }
-}
+  };
+};

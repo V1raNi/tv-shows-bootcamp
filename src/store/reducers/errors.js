@@ -1,12 +1,12 @@
 import { ADD_ERROR, REMOVE_ERROR } from '../actionTypes';
 
-export default (state = {message: null}, action) => {
-  switch(action.type) {
+export default (state = { message: 'No error' }, action) => {
+  switch (action.type) {
     case ADD_ERROR:
-      return {...state, message: action.error };
+      return { ...state, message: action.error };
     case REMOVE_ERROR:
-      return {...state, message: null };
+      return { ...state, message: 'No error' };
     default:
-      return state
+      return state;
   }
 };
